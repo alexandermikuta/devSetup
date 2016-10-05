@@ -1,0 +1,21 @@
+# Install Node.js using packages crafted by NodeSource
+---
+- name: Install dependencies
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  with_items:
+    - curl
+    - build-essential
+    - libssl-dev
+  become: yes
+
+- name: Install the PPA
+  shell: curl -sL https://deb.nodesource.com/setup_{{ nodejs_debian_repo_version }} | sudo -E bash -
+  become: yes
+
+- name: Install Node.js
+  apt:
+    pkg:
+      - nodejs
+    state: installed
+    update_cache: yes
+  become: yes

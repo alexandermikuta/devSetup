@@ -1,0 +1,14 @@
+---
+- name: Make sure git is installed
+  apt:
+    name: git
+    update_cache: yes
+  become: yes
+
+- name: Clone dotfiles repo
+  git:
+    repo: https://github.com/alexandermikuta/dotfiles.git
+    dest: "{{ user_home_dir }}/.dotfiles"
+    force: true
+  become: yes
+  become_user: "{{ machine_user }}"

@@ -1,0 +1,39 @@
+# role developed based on tutorial: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+---
+- name: Add Docker repo key
+  apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+    state: present
+  become: yes
+
+- name: Add sources to docker.list
+  lineinfile:
+    dest: /etc/apt/sources.list.d/docker.list
+    line: "deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main"
+    create: yes
+  become: yes
+  when: repo_key_added|succeeded and ansible_distribution == 'Ubuntu'
+
+- name: Install docker-engine
+  apt:
+    name: docker-engine
+    update_cache: yes
+    force: yes
+  become: yes
+
+- name: Install docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+  become: yes
+
+- name: Make docker-compose executable
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: 0755
+  become: yes
+
+- name: Make {{ machine_user }} a member of docker group
+  user: name={{ machine_user }} groups=docker append=yes
+  become: yes

@@ -1,0 +1,49 @@
+---
+- name: Install zsh
+  apt: pkg=zsh state=latest
+  register: installation
+  become: yes
+
+- name: Clone oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: "{{ user_home_dir }}/.oh-my-zsh"
+    force: true
+  when: installation|succeeded
+  register: cloning
+  become: yes
+  become_user: "{{ machine_user }}"
+
+- name: Use my .zshrc and .zshenv
+  file:
+    src: "{{ user_home_dir }}/.dotfiles/{{ item.src }}"
+    dest: "{{ user_home_dir }}/{{ item.dest }}"
+    state: link
+  with_items:
+    - { src: '.zshrc', dest: '.zshrc' }
+    - { src: '.zshenv', dest: '.zshenv' }
+  when: cloning|succeeded
+  become: yes
+  become_user: "{{ machine_user }}"
+
+- name: Remove default custom directory from oh-my-zsh
+  file:
+    path: "{{ user_home_dir }}/.oh-my-zsh/custom"
+    state: absent
+  register: custom_absent
+  become: yes
+  become_user: "{{ machine_user }}"
+
+- name: Use my custom oh-my-zsh stuff
+  file:
+    src: "{{ user_home_dir }}/.dotfiles/.oh-my-zsh/custom"
+    dest: "{{ user_home_dir }}/.oh-my-zsh/custom"
+    state: link
+  when: cloning|succeeded and custom_absent|succeeded
+  become: yes
+  become_user: "{{ machine_user }}"
+
+- name: Change default shell to zsh
+  user: name={{ machine_user }} shell=/bin/zsh
+  when: cloning|succeeded
+  become: yes

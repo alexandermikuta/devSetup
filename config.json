@@ -1,0 +1,13 @@
+{
+  "machine_user": "alexm",
+  "user_home_dir": "/home/alexm",
+  "nodejs_debian_repo_version": "6.x",
+  "scala_version": "2.11.8",
+  "atom_version": "1.10.2",
+  "docker_compose_version": "1.8.1",
+  "intellij_tmp": "/tmp/ideaIC.tar.gz",
+  "intellij_install_dir": "/opt/intellij",
+  "intellij_version": "2016.2.2",
+  "vagrant_version": "1.8.6",
+  "virtualbox_version": "5.1.6"
+}

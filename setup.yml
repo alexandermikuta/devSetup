@@ -1,0 +1,5 @@
+- name: a playbook to setup my local machine
+  hosts: all
+  roles:
+    - desktop
+    - development
