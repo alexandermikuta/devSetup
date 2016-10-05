@@ -7,7 +7,7 @@ Execute this command on the machine which you want to provision:
 wget -qO- https://github.com/alexandermikuta/devSetup/raw/master/provision.sh | bash
 ```
 
-![Installing the computer...](screenshot.png)
+![Installing the computer...](screenshot.jpg)
 
 ## What's inside?
 The playbook is divided into 2 roles: `desktop` and `development`.
