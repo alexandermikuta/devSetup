@@ -5,8 +5,6 @@
   - include: docker.yml
   - include: vagrant.yml
   - include: nodejs.yml
-  - include: ruby.yml
   - include: java.yml
   - include: scala.yml
   - include: intellij.yml
-  - include: heroku.yml

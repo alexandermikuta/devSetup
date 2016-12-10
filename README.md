@@ -22,7 +22,6 @@ The playbook is divided into 2 roles: `desktop` and `development`.
 
 `Development` role provisions all programming-related stuff, like:
 
-- Vim
 - Atom,
 - Docker,
 - IntelliJ,
