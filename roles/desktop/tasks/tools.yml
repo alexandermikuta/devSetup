@@ -11,7 +11,7 @@
       - htop
       - fdupes
       - unzip
-    state: installed
+    state: present
     update_cache: yes
   become: yes
 

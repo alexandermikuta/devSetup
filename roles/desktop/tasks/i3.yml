@@ -9,7 +9,7 @@
       - gnome-screensaver
       - udevil # automount
       - pulseaudio-module-bluetooth # allows sending audio to bluetooth devices
-    state: installed
+    state: present
     update_cache: yes
   become: yes
 

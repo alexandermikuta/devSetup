@@ -16,6 +16,6 @@
   apt:
     pkg:
       - nodejs
-    state: installed
+    state: present
     update_cache: yes
   become: yes
