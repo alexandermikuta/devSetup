@@ -1,8 +1,3 @@
 ---
-  - include: user.yml
   - include: tools.yml
-  - include: dotfiles.yml
-  - include: font.yml
-  - include: i3.yml
   - include: chrome.yml
-  - include: ohmyzsh.yml
